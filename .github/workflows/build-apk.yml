@@ -23,9 +23,9 @@ jobs:
         with:
           node-version: 22
 
-      - name: Bersihkan cache npm & install
+      - name: Pin npm@10 & install
         run: |
-          npm cache clean --force
+          npm install -g npm@10
           NODE_OPTIONS=--max-old-space-size=4096 npm install --no-audit --no-fund
         env:
           NODE_OPTIONS: --max-old-space-size=4096
