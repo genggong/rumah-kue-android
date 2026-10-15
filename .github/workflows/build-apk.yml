@@ -22,10 +22,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-audit --no-fund
+      - name: Bersihkan cache npm & install
+        run: |
+          npm cache clean --force
+          NODE_OPTIONS=--max-old-space-size=4096 npm install --no-audit --no-fund
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Expo prebuild (generate android/)
         run: npx expo prebuild -p android --no-install
